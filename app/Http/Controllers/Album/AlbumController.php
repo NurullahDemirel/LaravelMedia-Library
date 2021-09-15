@@ -52,7 +52,6 @@ class AlbumController extends Controller
     public function show(Album $album)
     {
         $photos=$album->getMedia();
-//        dd($photos[0]->getPath());
         return view('albums.show',compact('album','photos'));
     }
 
@@ -76,6 +75,7 @@ class AlbumController extends Controller
      */
     public function update(Request $request, Album $album)
     {
+
         $album->update($request->all());
         return back()->with('success','Post was updated successfully');
     }
@@ -95,8 +95,11 @@ class AlbumController extends Controller
 
     public function upload(Album $album,Request $request)
     {
+        if ($request->has('cover_image')){
+            $album->addMedia($request->cover_image)->toMediaCollection('poster');
+        }
         if ($request->has('image')){
-            $album->addMedia($request->image)->toMediaCollection();
+            $album->addMedia($request->image)->toMediaCollection('gallery');
         }
         return redirect()->back()->with('success','Post was updated successfully');
     }
