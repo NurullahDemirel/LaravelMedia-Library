@@ -35,7 +35,7 @@
                         <img
                             alt="gallery"
                             class="object-cover object-center w-full h-full block"
-                            src="{{ $photo->getUrl('thumb') }}">
+                            src="{{ $photo->getUrl() }}">
                     </a>
                     <div class="flex justify-between mt-4 p-4">
                         <a class="m-2 p-2 bg-blue-500 hover:bg-blue-700 rounded-lg"

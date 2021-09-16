@@ -51,7 +51,7 @@ class AlbumController extends Controller
      */
     public function show(Album $album)
     {
-        $photos=$album->getMedia();
+        $photos=$album->getMedia('gallery');
         return view('albums.show',compact('album','photos'));
     }
 
@@ -107,7 +107,7 @@ class AlbumController extends Controller
 
     public function showImage(Album $album,$id)
     {
-        $media=$album->getMedia();
+        $media=$album->getMedia('gallery');
         $image=$media->where('id',$id)->first();
         return view('albums.show-image',compact('image'));
     }
