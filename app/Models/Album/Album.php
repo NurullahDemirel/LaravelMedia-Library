@@ -15,26 +15,17 @@ class Album extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
     protected $guarded=[];
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(300)
-            ->height(300)
-            ->performOnCollections('poster');
-
-        $this->addMediaConversion('gallery')
-            ->width(400)
-            ->height(400)
-            ->performOnCollections('gallery');
-
-    }
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('poster');
-
-        $this->addMediaCollection('gallery');
-
+        $this
+            ->addMediaCollection('poster')
+            ->singleFile()
+            ->registerMediaConversions(function (Media $media) {
+                $this
+                    ->addMediaConversion('cover image')
+                    ->width(300)
+                    ->height(300)
+                    ->nonQueued();
+            });
     }
-
-
 }

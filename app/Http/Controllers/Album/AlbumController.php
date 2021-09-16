@@ -96,7 +96,8 @@ class AlbumController extends Controller
     public function upload(Album $album,Request $request)
     {
         if ($request->has('cover_image')){
-            $album->addMedia($request->cover_image)->toMediaCollection('poster');
+                $album->addMedia($request->cover_image)
+                ->toMediaCollection('poster');
         }
         if ($request->has('image')){
             $album->addMedia($request->image)->toMediaCollection('gallery');
